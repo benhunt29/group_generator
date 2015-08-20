@@ -38,30 +38,25 @@ var teamNames =[
 
 //selector variable, this is saying find the html element that matches the id in this case.
 var $gen = $('#generateGroupButton');
+
 //on click function looks for any click within the group size element then it defines our variable grpSize as equal to the input value selected in groupSize on html.
 $gen.on('click', function(){
 	var $grpSize = $('input[name=groupSize]:checked');
 	var grpNum = Math.round(classArray.length / $grpSize.val());
-	console.log(grpNum)
+
 //variable runs a couple function to make random groups
 	var randGrps = generateGroups(shuffle(classArray), grpNum);
     var randTeamNames = generateGroupNames(shuffle(teamNames),$grpSize.val());
     console.log(randTeamNames);
-   $('.content').html(template({randGrps: randGrps, teamNames: randTeamNames}));
-    //$('.content').html(template(teamNames));
+    // handlebars stuff
+    var source   = $("#entry-template").html();
+    var template = Handlebars.compile(source);
+    $('.content').html(template({randGrps: randGrps, teamNames: randTeamNames}));
 })
 
-// handlebars stuff
-
-var source   = $("#entry-template").html();
-var template = Handlebars.compile(source);
-
- //  $('.content').html(template(randGrps));
-
-
 });
-//This is Fisher-Yates randomizer array. Thanks! Fisher-Yates!
 
+// This is Fisher-Yates randomizer array. Thanks! Fisher-Yates!
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -80,23 +75,25 @@ function shuffle(array) {
 
   return array;
 }
-//The main function to generate the groups and split the main array
+
+// The main function to generate the groups and split the main array
 function generateGroups(array,grpNum){
 	var i = 0;
 	var j = 0;
 	var groupArray = [];
 	var groups = {};
-// we start at 0 to split group, and you want to go up to the group number element, and defining the window of your group size
-//i defines the starting index of the slice, you want to increment i by the grpNum
-// j is the loop number, the ending index is always equal to grpNum+grpNum*j 
 
+    // we start at 0 to split group, and you want to go up to the group number element, and defining the window of your group size
+    // i defines the starting index of the slice, you want to increment i by the grpNum
+    // j is the loop number, the ending index is always equal to grpNum+grpNum*j 
 	for (i = 0;i<array.length;i+=grpNum){
 		
-	//this slices the group array for whatever grpNum you are trying to size	
+	   // this slices the group array for whatever grpNum you are trying to size	
 		groupArray.push(array.slice(i,grpNum+grpNum*j));
 		j++;
 		};
-	//if the last array in the group array contains 1 person it will be pushed to the previous array so no one works alone. 	
+	
+    // if the last array in the group array contains 1 person it will be pushed to the previous array so no one works alone. 	
 	if (groupArray[groupArray.length-1].length == 1){
 		groupArray[groupArray.length-2].push(groupArray[groupArray.length-1][0]);
 		groupArray.pop();
@@ -105,10 +102,10 @@ function generateGroups(array,grpNum){
 	return groupArray;
 }
 
-    function generateGroupNames(array, groupSize){
-        var randomTeamNames =[];
-        for(var i=0; i<groupSize; i++){
-            randomTeamNames.push(array[i]);
-        }
-        return randomTeamNames;
+function generateGroupNames(array, groupSize){
+    var randomTeamNames =[];
+    for(var i=0; i<groupSize; i++){
+        randomTeamNames.push(array[i]);
     }
+    return randomTeamNames;
+}

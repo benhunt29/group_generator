@@ -3,5 +3,5 @@ input[type="radio"]{
 }
 
 .group{
-	border: 1px solid orange;
+	background-color: lightblue;
 }
