@@ -23,7 +23,7 @@
 	</head>
 
 	<body>
-		<script id="entry-template" type="text/x-handlebars-template">
+
   			
 			<div class = "container">
 				<div class = "jumbotron centered">
@@ -37,9 +37,7 @@
 					   <fieldset>
 					    	<form id = "groupSize">
 					    		<div class = "col-lg-5 text-right">
-						    		<input type = "radio" name = "groupSize" value = "1">1
-						    		</input>
-						    		<input type = "radio" name = "groupSize" value = "2">2
+						    		<input type = "radio" name = "groupSize" value = "2" checked="checked">2
 						    		</input>
 						    		<input type = "radio" name = "groupSize" value = "3">3
 						    		</input>
@@ -60,25 +58,29 @@
 					    		</div>
 
 					    		<div class = "col-lg-7">
-					    			<input type = "submit" id = "generateGroupButton" value = "Generate Group"></input>
+					    			<input type = "button" id = "generateGroupButton" value = "Generate Group"></input>
 					    		</div>
 					    	</form>
 					    </fieldset>
 					</div>
 			    </div>
 			</div>
-
+		<script id="entry-template" type="text/x-handlebars-template">
 			<div class = "container">
-				{{#each}}
-				<div class = "row">
-					{{this}}
+				{{#each randGrps}}
+				<div class = "group row col-lg-1 col-lg-offset-1">
+				<h2>{{teamName}}</h2>
+					{{#each this}}
+						<p>{{this}}
+						</p>
+					{{/each}}
 				</div>
 				{{/each}}
 
 			</div>
 			    	
 		</script>
-		<div class = "person"></div>
+		<div class = "content"></div>
 
 	</body>
 
