@@ -2,6 +2,20 @@ input[type="radio"]{
 	margin: 5px;
 }
 
+.slide {
+    position: absolute;
+    left: -10000px;
+    animation: slide 1s forwards;
+    animation-delay: .5s;
+}
+
+@keyframes slide {
+    100% { left: 120px; }
+}
+
 .group{
+	border: 1px black solid;
 	background-color: lightblue;
+	margin: 10px 5px 5px 5px;
+	
 }

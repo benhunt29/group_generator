@@ -36,7 +36,7 @@ var teamNames =[
     "Temporal dead zone and errors with let",
 ];
 
-//selector variable, this is saying find the html element that matches the id in this case.
+//selector variable, this selects the generate group button
 var $gen = $('#generateGroupButton');
 
 //on click function looks for any click within the group size element then it defines our variable grpSize as equal to the input value selected in groupSize on html.
@@ -47,11 +47,11 @@ $gen.on('click', function(){
 //variable runs a couple function to make random groups
 	var randGrps = generateGroups(shuffle(classArray), grpNum);
     var randTeamNames = generateGroupNames(shuffle(teamNames),$grpSize.val());
-    console.log(randTeamNames);
+    var Groups = generateGroupObjectsArray(randGrps,randTeamNames,$grpSize.val());
     // handlebars stuff
     var source   = $("#entry-template").html();
     var template = Handlebars.compile(source);
-    $('.content').html(template({randGrps: randGrps, teamNames: randTeamNames}));
+    $('.content').html(template(Groups));
 })
 
 });
@@ -109,3 +109,17 @@ function generateGroupNames(array, groupSize){
     }
     return randomTeamNames;
 }
+
+function Group(name,members){
+	this.name = name;
+	this.members = members;
+}
+
+function generateGroupObjectsArray(groupArray,teamNames,groupNum){
+	var GroupObjectsArray = [];
+	for(i=0;i<groupArray.length;i++){
+		GroupObjectsArray.push(new Group(teamNames[i],groupArray[i]));
+	}
+	return GroupObjectsArray;
+}
+	
