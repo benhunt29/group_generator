@@ -4,7 +4,7 @@ input[type="radio"]{
 
 .slide {
     position: absolute;
-    left: -10000px;
+    left: -1000px;
     animation: slide 1s forwards;
     animation-delay: .5s;
 }
