@@ -13,6 +13,10 @@ input[type="radio"]{
     100% { left: 120px; }
 }
 
+h3 {
+	font-size: 20px;
+}
+
 .group{
 	border: 1px black solid;
 	background-color: lightblue;
