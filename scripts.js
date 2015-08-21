@@ -117,7 +117,7 @@ function Group(name,members){
 
 function generateGroupObjectsArray(groupArray,teamNames,groupNum){
 	var GroupObjectsArray = [];
-	for(i=0;i<groupNum;i++){
+	for(i=0;i<groupArray.length;i++){
 		GroupObjectsArray.push(new Group(teamNames[i],groupArray[i]));
 	}
 	return GroupObjectsArray;
